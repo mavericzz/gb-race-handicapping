@@ -31,6 +31,24 @@ if FRONTEND.exists():
     app.mount("/assets", StaticFiles(directory=FRONTEND), name="assets")
 
 
+@app.get("/styles.css")
+def styles():
+    return FileResponse(FRONTEND / "styles.css", media_type="text/css")
+
+
+@app.get("/app.js")
+def app_js():
+    return FileResponse(FRONTEND / "app.js", media_type="text/javascript")
+
+
+@app.get("/card.json")
+def card_json():
+    path = FRONTEND / "card.json"
+    if not path.exists():
+        raise HTTPException(404, "card snapshot missing")
+    return FileResponse(path, media_type="application/json")
+
+
 def _latest_card() -> Path | None:
     cards = sorted(DATA.glob("card_*.json"))
     return cards[-1] if cards else None

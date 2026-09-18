@@ -192,6 +192,21 @@ def build_racing_sports(iso_date: str) -> dict:
     return {"source": "racing_sports", "date": iso_date, "meetings": meetings}
 
 
+def slim_card(card: dict) -> dict:
+    """Drop nested source blobs so GitHub Pages can ship a small snapshot."""
+    drop = {"punters", "racing_sports"}
+    meetings = []
+    for meeting in card.get("meetings") or []:
+        races = []
+        for race in meeting.get("races") or []:
+            runners = [{k: v for k, v in (r or {}).items() if k not in drop} for r in race.get("runners") or []]
+            plays = [{k: v for k, v in (p or {}).items() if k not in drop} for p in race.get("plays") or []]
+            races.append({**race, "runners": runners, "plays": plays})
+        meetings.append({**meeting, "races": races})
+    plays = [{k: v for k, v in (p or {}).items() if k not in drop} for p in card.get("plays") or []]
+    return {**card, "meetings": meetings, "plays": plays}
+
+
 def main() -> int:
     iso = "2026-09-19"
     DATA.mkdir(exist_ok=True)
@@ -202,6 +217,8 @@ def main() -> int:
     card = merge_and_score(punters, racing)
     out = DATA / f"card_{iso}.json"
     out.write_text(json.dumps(card, indent=2))
+    pages = ROOT / "frontend" / "card.json"
+    pages.write_text(json.dumps(slim_card(card)))
     plays = card.get("plays") or []
     print(
         f"Saved {out} — {len(card.get('meetings') or [])} meetings, "

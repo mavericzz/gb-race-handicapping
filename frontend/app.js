@@ -138,9 +138,28 @@ function render() {
   renderSheet();
 }
 
+function isStaticHost() {
+  return /github\.io$/i.test(window.location.hostname);
+}
+
+async function fetchCard() {
+  const urls = isStaticHost() ? ["card.json"] : ["/api/card", "card.json"];
+  let lastErr;
+  for (const url of urls) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`${res.status} ${url}`);
+      return await res.json();
+    } catch (err) {
+      lastErr = err;
+    }
+  }
+  throw lastErr || new Error("no card");
+}
+
 async function load() {
-  const res = await fetch("/api/card");
-  state.card = await res.json();
+  if (isStaticHost()) $("rescrape").hidden = true;
+  state.card = await fetchCard();
   state.meeting = 0;
   state.race = 0;
   render();
