@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GB Desk — WIN overlay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header class="mast">
+    <div class="mast__mark">GB DESK</div>
+    <div class="mast__title">
+      <h1>Win overlay handicapper</h1>
+      <p id="card-meta">Loading Saturday card…</p>
+    </div>
+    <form class="mast__tools" id="tools">
+      <label>Bankroll £<input id="bankroll" type="number" min="50" step="50" value="500" /></label>
+      <button type="button" id="rescrape">Rescrape</button>
+    </form>
+  </header>
+  <section class="plays" id="plays-strip"></section>
+  <nav class="meetings" id="meetings"></nav>
+  <main>
+    <aside class="races" id="races"></aside>
+    <section class="sheet" id="sheet"></section>
+  </main>
+  <p class="legal">18+ · Form is public market data, not a guarantee. Stake only what you can lose. GambleAware.org</p>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

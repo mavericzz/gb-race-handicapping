@@ -1,0 +1,126 @@
+:root {
+  --ink: #1b1712;
+  --paper: #f3ead6;
+  --rule: #cbbfa3;
+  --green: #143528;
+  --green-2: #1f4a38;
+  --gold: #c4a35a;
+  --play: #9c1c14;
+  --watch: #8a5a12;
+  --mute: #6d6456;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: "IBM Plex Mono", ui-monospace, monospace; }
+body { min-height: 100vh; }
+
+.mast {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+  align-items: end;
+  padding: 1.1rem 1.4rem 0.9rem;
+  background: var(--green);
+  color: var(--paper);
+  border-bottom: 4px solid var(--gold);
+}
+.mast__mark {
+  font-family: Fraunces, serif;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  border: 1px solid var(--gold);
+  padding: 0.45rem 0.55rem;
+}
+.mast h1 {
+  font-family: Fraunces, serif;
+  font-size: 1.65rem;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.mast p { margin: 0.2rem 0 0; color: #d9c9a3; font-size: 0.78rem; }
+.mast__tools { display: flex; gap: 0.8rem; align-items: center; font-size: 0.75rem; }
+.mast__tools input {
+  width: 5.5rem;
+  margin-left: 0.35rem;
+  background: var(--green-2);
+  color: var(--paper);
+  border: 1px solid var(--gold);
+  padding: 0.35rem 0.4rem;
+}
+button {
+  background: var(--gold);
+  color: var(--green);
+  border: 0;
+  font: inherit;
+  font-weight: 600;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+}
+
+.plays {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding: 0.7rem 1.2rem;
+  border-bottom: 1px solid var(--rule);
+  background: #efe4c8;
+}
+.play-chip {
+  min-width: 14rem;
+  border: 1px solid var(--play);
+  background: #f7ece0;
+  padding: 0.45rem 0.6rem;
+  cursor: pointer;
+}
+.play-chip b { display: block; color: var(--play); font-size: 0.72rem; letter-spacing: 0.08em; }
+.play-chip span { display: block; font-family: Fraunces, serif; font-size: 1.05rem; }
+
+.meetings { display: flex; gap: 0; border-bottom: 1px solid var(--rule); }
+.meetings button {
+  background: transparent;
+  color: var(--ink);
+  border-right: 1px solid var(--rule);
+  border-radius: 0;
+  padding: 0.7rem 1rem;
+}
+.meetings button.active { background: var(--ink); color: var(--paper); }
+
+main { display: grid; grid-template-columns: 15rem 1fr; min-height: 70vh; }
+.races { border-right: 1px solid var(--rule); padding: 0.4rem 0; }
+.races button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: var(--ink);
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--rule);
+}
+.races button.active { background: #e7d9b6; }
+.races small { display: block; color: var(--mute); font-size: 0.68rem; }
+
+.sheet { padding: 0.8rem 1rem 2rem; overflow-x: auto; }
+.sheet h2 { font-family: Fraunces, serif; margin: 0 0 0.2rem; font-size: 1.4rem; }
+.sheet .meta { color: var(--mute); margin-bottom: 0.8rem; font-size: 0.75rem; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+th, td { border-bottom: 1px solid var(--rule); padding: 0.42rem 0.4rem; text-align: left; vertical-align: top; }
+th { font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
+tr.play { background: #f3d4c8; }
+tr.watch { background: #f4e6c2; }
+.num { font-variant-numeric: tabular-nums; }
+.horse { font-family: Fraunces, serif; font-size: 0.98rem; }
+.edge-pos { color: var(--play); font-weight: 600; }
+.action { font-weight: 600; letter-spacing: 0.08em; font-size: 0.7rem; }
+details { margin-top: 0.2rem; color: var(--mute); }
+details summary { cursor: pointer; }
+
+.legal { padding: 0.8rem 1.2rem 1.4rem; color: var(--mute); font-size: 0.7rem; }
+.empty { padding: 2rem; }
+@media (max-width: 900px) {
+  .mast, main { display: block; }
+  .races { display: flex; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--rule); }
+  .races button { min-width: 9rem; }
+}
